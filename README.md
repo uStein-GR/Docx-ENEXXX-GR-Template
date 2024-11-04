@@ -1,6 +1,6 @@
-    Webserver with low-cost frontends interface for export data into word files that fix template, which use for SeniorProject 2024
+# Webserver with low-cost frontends interface for export data into word files that fix template, which use for SeniorProject 2024
 
-<Initialize Settings by following commands>
+## Initialize Settings by following commands>
 - Asusual Create the React Application
     npx create-react-app docx-test
 
@@ -11,8 +11,9 @@
     npm install docx@7.1.0
     npm install docx@latest file-saver@latest
 
-<Testing the initial system by add following command into file App.js in subdirectory file src>
+## Testing the initial system by add following command into file App.js in subdirectory file src>
 
+```
 import React from "react";
 import { Document, Packer, Paragraph } from "docx";
 import { saveAs } from "file-saver";
@@ -46,5 +47,4 @@ export default function App() {
         </div>
     );
 }
-
--
+```
