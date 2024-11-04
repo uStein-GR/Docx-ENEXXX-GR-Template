@@ -1,13 +1,13 @@
 ## Initialize Settings by following commands
-- Asusual Create the React Application
-a    npx create-react-app docx-test
+- Asusual Create the React Application\
+    npx create-react-app docx-test\
 
-- Install DOCX into package.json
-b    npm install docx file-saver
+- Install DOCX into package.json\
+    npm install docx file-saver\
 
-- Install the last version of DOCX
-c    npm install docx@7.1.0
-c    npm install docx@latest file-saver@latest
+- Install the last version of DOCX\
+    npm install docx@7.1.0\
+    npm install docx@latest file-saver@latest\
 
 ## Testing the initial system by add following command into file App.js in subdirectory file src
 
