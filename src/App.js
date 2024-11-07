@@ -228,7 +228,6 @@ export default function App() {
             ],
         });
 
-        
 
         Packer.toBlob(doc)
             .then((blob) => {
