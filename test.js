@@ -29,7 +29,7 @@ export default function App() {
 
                         // Course Code and Instructor
                         new Paragraph({
-                            text: "ENEXXX -------------------------------- 1/2024",
+                            text: "ENEXXX -------------------------------- 1/20244444",
                             alignment: AlignmentType.CENTER,
                             spacing: { after: 100 },
                         }),
