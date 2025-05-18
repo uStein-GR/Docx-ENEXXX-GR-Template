@@ -17,6 +17,12 @@ export default function ExportWordDoc() {
     const doc = new Document({
       sections: [
         {
+          // ตั้งค่าขอบหน้า 1" (1440 twip) รอบเอกสาร
+          properties: {
+            page: {
+              margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 },
+            },
+          },
           children: [
             // --- Header ---
             new Paragraph({
@@ -24,46 +30,78 @@ export default function ExportWordDoc() {
                 new TextRun({
                   text: "King Mongkut’s University of Technology Thonburi",
                   bold: true,
+                  size: 24,
                 }),
               ],
               alignment: AlignmentType.CENTER,
-              spacing: { after: 100 },
+              spacing: { after: 200 },
             }),
             new Paragraph({
-              text: "Department of Electronics and Telecommunication Engineering",
+              children: [
+                new TextRun({
+                  text: "Department of Electronics and Telecommunication Engineering",
+                  size: 24,
+                }),
+              ],
               alignment: AlignmentType.CENTER,
-              spacing: { after: 100 },
+              spacing: { after: 200 },
             }),
             new Paragraph({
-              text: "Course Portfolio",
+              children: [
+                new TextRun({
+                  text: "Course Portfolio",
+                  bold: true,
+                  size: 24,
+                }),
+              ],
               alignment: AlignmentType.CENTER,
               spacing: { after: 300 },
             }),
             new Paragraph({
-              text: "ENEXXX \t--------------------------------\t1/2024",
+              children: [
+                new TextRun({
+                  text: "ENEXXX \t--------------------------------\t1/2024",
+                  size: 24,
+                }),
+              ],
               alignment: AlignmentType.CENTER,
-              spacing: { after: 100 },
+              spacing: { after: 200 },
             }),
             new Paragraph({
-              text: "Instructor: \t\t--------------------------------",
+              children: [
+                new TextRun({
+                  text: "Instructor: \t\t--------------------------------",
+                  size: 24,
+                }),
+              ],
               alignment: AlignmentType.CENTER,
               spacing: { after: 400 },
             }),
 
+            // --- Course Learning Outcomes ---
             new Paragraph({
               children: [
                 new TextRun({
                   text: "Course Learning Outcomes (CLOs)",
                   bold: true,
+                  size: 24,
                 }),
               ],
               spacing: { before: 200, after: 100 },
             }),
+
             // --- Combined CLO + SO Table (70/30) ---
             new Table({
               width: { size: 100, type: WidthType.PERCENTAGE },
+              margins: {
+                top: 100,
+                bottom: 100,
+                left: 100,
+                right: 100,
+                insideH: 100,
+                insideV: 100,
+              },
               rows: [
-                // 1) Header row: CLOs & SOs
                 new TableRow({
                   children: [
                     new TableCell({
@@ -72,8 +110,10 @@ export default function ExportWordDoc() {
                         new Paragraph({
                           children: [
                             new TextRun({
-                              text: "At the end of the course, students should be able to:",
+                              text:
+                                "At the end of the course, students should be able to:",
                               italics: true,
+                              size: 24,
                             }),
                           ],
                         }),
@@ -87,6 +127,7 @@ export default function ExportWordDoc() {
                             new TextRun({
                               text: "Student Outcomes\n(SOs)",
                               italics: true,
+                              size: 24,
                             }),
                           ],
                           alignment: AlignmentType.CENTER,
@@ -95,245 +136,482 @@ export default function ExportWordDoc() {
                     }),
                   ],
                 }),
-                // 3) PI → X rows
                 ...[1, 2, 3].map(() =>
                   new TableRow({
                     children: [
-                      new TableCell({ children: [new Paragraph("PI XX")] }),
-                      new TableCell({ children: [new Paragraph("X")] }),
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            children: [new TextRun({ text: "PI XX", size: 24 })],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            children: [new TextRun({ text: "X", size: 24 })],
+                          }),
+                        ],
+                      }),
                     ],
                   })
                 ),
               ],
             }),
-            // caption
             new Paragraph({
-              text: "(PI = Performance indicator)",
+              children: [
+                new TextRun({
+                  text: "(PI = Performance indicator)",
+                  italics: true,
+                  size: 24,
+                }),
+              ],
               spacing: { before: 100, after: 300 },
             }),
 
-            // --- 1. Methods to Assess the CLOs (bold) ---
+            // --- 1. Methods to Assess the CLOs ---
             new Paragraph({
               children: [
                 new TextRun({
                   text: "1. Methods to Assess the CLOs",
                   bold: true,
+                  size: 24,
                 }),
               ],
               spacing: { before: 200, after: 100 },
             }),
             new Table({
               width: { size: 100, type: WidthType.PERCENTAGE },
+              margins: {
+                top: 100,
+                bottom: 100,
+                left: 100,
+                right: 100,
+                insideH: 100,
+                insideV: 100,
+              },
               rows: [
                 new TableRow({
                   children: [
                     new TableCell({
                       width: { size: 15, type: WidthType.PERCENTAGE },
-                      children: [new Paragraph("CLO")],
+                      children: [
+                        new Paragraph({
+                          children: [
+                            new TextRun({ text: "CLO", size: 24 }),
+                          ],
+                        }),
+                      ],
                     }),
                     new TableCell({
                       width: { size: 35, type: WidthType.PERCENTAGE },
-                      children: [new Paragraph("Method of assessment")],
+                      children: [
+                        new Paragraph({
+                          children: [
+                            new TextRun({
+                              text: "Method of assessment",
+                              size: 24,
+                            }),
+                          ],
+                        }),
+                      ],
                     }),
                     new TableCell({
                       width: { size: 15, type: WidthType.PERCENTAGE },
-                      children: [new Paragraph("Assessment tool")],
+                      children: [
+                        new Paragraph({
+                          children: [
+                            new TextRun({ text: "Assessment tool", size: 24 }),
+                          ],
+                        }),
+                      ],
                     }),
                     new TableCell({
                       width: { size: 35, type: WidthType.PERCENTAGE },
-                      children: [new Paragraph("Criteria for the indicators")],
+                      children: [
+                        new Paragraph({
+                          children: [
+                            new TextRun({
+                              text:
+                                "Criteria for the indicators",
+                              size: 24,
+                            }),
+                          ],
+                        }),
+                      ],
                     }),
                   ],
                 }),
                 ...[1, 2, 3].flatMap(() => [
                   new TableRow({
                     children: [
-                      new TableCell({ children: [new Paragraph("PI X")] }),
                       new TableCell({
                         children: [
-                          new Paragraph(
-                            "Direct: Embedded test question pertaining to the PI"
-                          ),
+                          new Paragraph({
+                            children: [
+                              new TextRun({ text: "PI X", size: 24 }),
+                            ],
+                          }),
                         ],
                       }),
-                      new TableCell({ children: [new Paragraph("")] }),
                       new TableCell({
                         children: [
-                          new Paragraph(
-                            "My own 5-scaled rubric that matches the Department’s scale (e.g., 5=excellent, …, 1=very poor)"
-                          ),
+                          new Paragraph({
+                            children: [
+                              new TextRun({
+                                text:
+                                  "Direct: Embedded test question pertaining to the PI",
+                                size: 24,
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            children: [new TextRun({ text: "", size: 24 })],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            children: [
+                              new TextRun({
+                                text:
+                                  "My own 5-scaled rubric that matches the Department’s scale (e.g., 5=excellent, …, 1=very poor)",
+                                size: 24,
+                              }),
+                            ],
+                          }),
                         ],
                       }),
                     ],
                   }),
                   new TableRow({
                     children: [
-                      new TableCell({ children: [new Paragraph("")] }),
-                      new TableCell({ children: [new Paragraph("Indirect:")] }),
-                      new TableCell({ children: [new Paragraph("N/A")] }),
-                      new TableCell({ children: [new Paragraph("N/A")] }),
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            children: [new TextRun({ text: "", size: 24 })],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            children: [new TextRun({ text: "Indirect:", size: 24 })],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            children: [new TextRun({ text: "N/A", size: 24 })],
+                          }),
+                        ],
+                      }),
+                      new TableCell({
+                        children: [
+                          new Paragraph({
+                            children: [new TextRun({ text: "N/A", size: 24 })],
+                          }),
+                        ],
+                      }),
                     ],
                   }),
                 ]),
               ],
             }),
 
-            // --- 2. Result of CLOs Assessment (bold) ---
+            // --- 2. Result of CLOs Assessment ---
             new Paragraph({
               children: [
                 new TextRun({
                   text: "2. Result of CLOs Assessment",
                   bold: true,
+                  size: 24,
                 }),
               ],
               spacing: { before: 300, after: 100 },
             }),
             new Paragraph({
               children: [
-                new TextRun({ text: "Direct Assessment", bold: true }),
+                new TextRun({ text: "Direct Assessment", bold: true, size: 24 }),
               ],
               spacing: { after: 100 },
             }),
             new Paragraph({
-              text: "The target is to have at least 60% of the students achieve each performance indicator in Level 4 or 5. The column “Result” indicates whether the accumulated percentage meets the target.",
+              children: [
+                new TextRun({
+                  text:
+                    "The target is to have at least 60% of the students achieve each performance indicator in Level 4 or 5. The column “Result” indicates whether the accumulated percentage meets the target.",
+                  size: 24,
+                }),
+              ],
               spacing: { after: 100 },
             }),
             new Paragraph({
-              text: "Sample size = number of students enrolled in the course = XX",
+              children: [
+                new TextRun({
+                  text:
+                    "Sample size = number of students enrolled in the course = XX",
+                  size: 24,
+                }),
+              ],
               spacing: { after: 200 },
             }),
             new Table({
               width: { size: 100, type: WidthType.PERCENTAGE },
+              margins: {
+                top: 100,
+                bottom: 100,
+                left: 100,
+                right: 100,
+                insideH: 100,
+                insideV: 100,
+              },
               rows: [
                 new TableRow({
                   children: [
-                    new TableCell({ rowSpan: 2, children: [new Paragraph("CLO")] }),
-                    new TableCell({ rowSpan: 2, children: [new Paragraph("Average skill level")] }),
-                    new TableCell({ columnSpan: 5, children: [new Paragraph("Distribution of skill level")] }),
-                    new TableCell({ rowSpan: 2, children: [new Paragraph("Cumulation\nat levels ≥ 4")] }),
-                    new TableCell({ rowSpan: 2, children: [new Paragraph("Meet target?")] }),
+                    new TableCell({
+                      rowSpan: 2,
+                      children: [
+                        new Paragraph({
+                          children: [new TextRun({ text: "CLO", size: 24 })],
+                        }),
+                      ],
+                    }),
+                    new TableCell({
+                      rowSpan: 2,
+                      children: [
+                        new Paragraph({
+                          children: [
+                            new TextRun({ text: "Average skill level", size: 24 }),
+                          ],
+                        }),
+                      ],
+                    }),
+                    new TableCell({
+                      columnSpan: 5,
+                      children: [
+                        new Paragraph({
+                          children: [
+                            new TextRun({ text: "Distribution of skill level", size: 24 }),
+                          ],
+                        }),
+                      ],
+                    }),
+                    new TableCell({
+                      rowSpan: 2,
+                      children: [
+                        new Paragraph({
+                          children: [
+                            new TextRun({ text: "Cumulation\nat levels ≥ 4", size: 24 }),
+                          ],
+                        }),
+                      ],
+                    }),
+                    new TableCell({
+                      rowSpan: 2,
+                      children: [
+                        new Paragraph({
+                          children: [new TextRun({ text: "Meet target?", size: 24 })],
+                        }),
+                      ],
+                    }),
                   ],
                 }),
                 new TableRow({
-                  children: [
-                    new TableCell({ children: [new Paragraph("5")] }),
-                    new TableCell({ children: [new Paragraph("4")] }),
-                    new TableCell({ children: [new Paragraph("3")] }),
-                    new TableCell({ children: [new Paragraph("2")] }),
-                    new TableCell({ children: [new Paragraph("1")] }),
-                  ],
+                  children: [5, 4, 3, 2, 1].map((n) =>
+                    new TableCell({
+                      children: [
+                        new Paragraph({ children: [new TextRun({ text: `${n}`, size: 24 })] }),
+                      ],
+                    })
+                  ),
                 }),
                 ...[1, 2, 3].map(() =>
                   new TableRow({
                     children: Array(9)
                       .fill(null)
-                      .map(() => new TableCell({ children: [new Paragraph("")] })),
+                      .map(() =>
+                        new TableCell({
+                          children: [
+                            new Paragraph({ children: [new TextRun({ text: "", size: 24 })] }),
+                          ],
+                        })
+                      ),
                   })
                 ),
               ],
             }),
             new Paragraph({
-              text: "The work of the top, median, and bottom students in terms of their skill levels are shown in Appendices A, B, and C, respectively. The top student had PIs XX of 5, 5, and 5, respectively. The median student had PIs XX of 3, 4-, and -3 respectively. The bottom student had PI XX of 1, 2, and 1, respectively.",
+              children: [
+                new TextRun({
+                  text:
+                    "The work of the top, median, and bottom students in terms of their skill levels are shown in Appendices A, B, and C, respectively. The top student had PIs XX of 5, 5, and 5, respectively. The median student had PIs XX of 3, 4-, and -3 respectively. The bottom student had PI XX of 1, 2, and 1, respectively.",
+                  size: 24,
+                }),
+              ],
               spacing: { after: 200 },
             }),
             new Paragraph({
               children: [
-                new TextRun({ text: "Indirect Assessment", bold: true }),
+                new TextRun({ text: "Indirect Assessment", bold: true, size: 24 }),
               ],
             }),
-            new Paragraph({ text: "N/A", spacing: { after: 300 } }),
+            new Paragraph({
+              children: [new TextRun({ text: "N/A", size: 24 })],
+              spacing: { after: 300 },
+            }),
 
-            // --- 3. Self-Evaluation (bold) ---
+            // --- 3. Self-Evaluation ---
             new Paragraph({
               children: [
                 new TextRun({
-                  text: "3. Self-Evaluation on the Validity and Reliability of the Direct Assessment",
+                  text:
+                    "3. Self-Evaluation on the Validity and Reliability of the Direct Assessment",
                   bold: true,
+                  size: 24,
                 }),
               ],
               spacing: { before: 300, after: 100 },
             }),
             new Paragraph({
-              text: "Using the Department-issued 5-scaled rubric on validity and reliability, the instructor evaluated the validity and reliability of the CLO assessment as follows:",
+              children: [
+                new TextRun({
+                  text:
+                    "Using the Department-issued 5-scaled rubric on validity and reliability, the instructor evaluated the validity and reliability of the CLO assessment as follows:",
+                  size: 24,
+                }),
+              ],
               spacing: { after: 200 },
             }),
             new Table({
               width: { size: 100, type: WidthType.PERCENTAGE },
+              margins: {
+                top: 100,
+                bottom: 100,
+                left: 100,
+                right: 100,
+                insideH: 100,
+                insideV: 100,
+              },
               rows: [
                 new TableRow({
                   children: [
                     new TableCell({
-                      width: { size: 15, type: WidthType.PERCENTAGE },
-                      children: [new Paragraph("SO")],
+                      width: { size: 15, type: WidthType.PERCENTAGE }, children:
+                      [new Paragraph({ children: [new TextRun({ text: "SO", size: 24 })] })],
                     }),
                     new TableCell({
-                      width: { size: 60, type: WidthType.PERCENTAGE },
-                      children: [new Paragraph("Parameter of the assessment tool")],
+                      width: { size: 60, type: WidthType.PERCENTAGE }, children:
+                      [new Paragraph({ children: [new TextRun({ text: "Parameter of the assessment tool", size: 24 })] })],
                     }),
                     new TableCell({
-                      width: { size: 25, type: WidthType.PERCENTAGE },
-                      children: [new Paragraph("Level (Meaning)")],
+                      width: { size: 25, type: WidthType.PERCENTAGE }, children:
+                      [new Paragraph({ children: [new TextRun({ text: "Level (Meaning)", size: 24 })] })],
                     }),
                   ],
                 }),
                 new TableRow({
                   children: [
-                    new TableCell({ children: [new Paragraph("X")] }),
-                    new TableCell({ children: [new Paragraph("Validity")] }),
-                    new TableCell({ children: [new Paragraph("")] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "X", size: 24 })] })] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Validity", size: 24 })] })] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "", size: 24 })] })] }),
                   ],
                 }),
                 new TableRow({
                   children: [
-                    new TableCell({ children: [new Paragraph("")] }),
-                    new TableCell({ children: [new Paragraph("Reliability")] }),
-                    new TableCell({ children: [new Paragraph("")] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "", size: 24 })] })] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "Reliability", size: 24 })] })] }),
+                    new TableCell({ children: [new Paragraph({ children: [new TextRun({ text: "", size: 24 })] })] }),
                   ],
                 }),
               ],
             }),
-            new Paragraph({ text: "Justification of the specified levels", spacing: { after: 300 } }),
+            new Paragraph({
+              children: [new TextRun({ text: "Justification of the specified levels", size: 24 })],
+              spacing: { after: 300 },
+            }),
 
-            // --- 4. Continuous Quality Improvement (bold) ---
+            // --- 4. Continuous Quality Improvement ---
             new Paragraph({
               children: [
-                new TextRun({ text: "4. Continuous Quality Improvement", bold: true }),
+                new TextRun({
+                  text: "4. Continuous Quality Improvement",
+                  bold: true,
+                  size: 24,
+                }),
               ],
               spacing: { before: 200, after: 100 },
             }),
             new Paragraph({
               children: [
-                new TextRun({ text: "Faculty Evaluation of Attainment of CLOs", bold: true }),
+                new TextRun({
+                  text: "Faculty Evaluation of Attainment of CLOs",
+                  bold: true,
+                  size: 24,
+                }),
               ],
               spacing: { after: 100 },
             }),
             new Paragraph({
               children: [
-                new TextRun({ text: "Student Evaluation of the Course Strengths and Weaknesses", bold: true }),
+                new TextRun({
+                  text: "Student Evaluation of the Course Strengths and Weaknesses",
+                  bold: true,
+                  size: 24,
+                }),
               ],
               spacing: { after: 100 },
             }),
             new Paragraph({
               children: [
-                new TextRun({ text: "Remedy Plan", bold: true }),
+                new TextRun({ text: "Remedy Plan", bold: true, size: 24 }),
               ],
               spacing: { after: 100 },
             }),
             new Paragraph({
-              text: "The course instructor proposed the following actions as possible remedies.",
+              children: [
+                new TextRun({
+                  text:
+                    "The course instructor proposed the following actions as possible remedies.",
+                  size: 24,
+                }),
+              ],
               spacing: { after: 300 },
             }),
 
             // --- Appendices ---
-            new Paragraph({ text: "Appendix A\nEmbedded Questions Done by a Top Student" }),
-            new Paragraph({ text: "Appendix B\nEmbedded Questions Done by a Median Student" }),
-            new Paragraph({ text: "Appendix C\nEmbedded Questions Done by a Bottom Student" }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "Appendix A", bold: true, size: 24 }),
+                new TextRun({ text: "\nEmbedded Questions Done by a Top Student", size: 24 }),
+              ],
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "Appendix B", bold: true, size: 24 }),
+                new TextRun({ text: "\nEmbedded Questions Done by a Median Student", size: 24 }),
+              ],
+            }),
+            new Paragraph({
+              children: [
+                new TextRun({ text: "Appendix C", bold: true, size: 24 }),
+                new TextRun({ text: "\nEmbedded Questions Done by a Bottom Student", size: 24 }),
+              ],
+            }),
           ],
         },
       ],
     });
 
-    Packer.toBlob(doc).then((blob) => saveAs(blob, "ENEXXX_Course_Portfolio_Final.docx"));
+    Packer.toBlob(doc).then((blob) =>
+      saveAs(blob, "ENEXXX_Course_Portfolio_Final.docx")
+    );
   };
 
   return (
